@@ -36,6 +36,10 @@ def order_payment(request):
     return render(request,"index.html")
 
 @csrf_exempt
-
+def call_back(request):
+    def verify_signature(response_data):
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID,settings.RAZORPAY_KEY_SECRET))
+        return client.utility.verify_payment_signature(response_data)
+    
 
 
